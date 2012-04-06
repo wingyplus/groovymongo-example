@@ -1,0 +1,47 @@
+/**
+ * groovy plugin in gradle
+ */
+apply plugin: 'groovy'
+
+/**
+ * mavenCentral is main maven artifact site
+ */
+repositories {
+	mavenCentral()
+}
+
+/**
+ * define dependencies to use in project
+ */
+dependencies {
+	// groovy version
+	groovy 'org.codehaus.groovy:groovy-all:1.8.6'
+	// use spock framework replace junit unit testing
+	testCompile 'org.spockframework:spock-core:0.6-groovy-1.8'
+	// use spring mongodb at runtime
+	runtime 'org.springframework.data:spring-data-mongodb:1.0.1.RELEASE'
+}
+
+/**
+ * generate project structure
+ * src/
+ * ├── main
+ * │   ├── groovy
+ * │   └── resources
+ * └── test
+ *     ├── groovy
+ *     └── resources
+ */
+task init() {
+	// generate src main and test groovy
+	sourceSets.all.groovy.srcDirs*.each { it.mkdirs() }
+	// generate resources folder 
+	sourceSets.all.resources.srcDirs*.each { it.mkdirs() }
+}
+
+/**
+ * generate gradlew
+ */
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.0-milestone-9'
+}
