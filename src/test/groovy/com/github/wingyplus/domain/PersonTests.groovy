@@ -6,16 +6,16 @@ class PersonTests extends Specification {
 	
 	def 'get fullname'() {
 		// given is alias of setup block
-		given:
+		given: 'new object Person'
 		def person = new Person()
 
-		when:
+		when: 'assign properties to obj'
 		person.id = 1
 		person.firstname = 'Thanabodee'
 		person.lastname = 'Charoenpiriyakij'
 		person.age = 22
 
-		then:
+		then: 'test get fullname'
 		person.getFullName() == 'Thanabodee Charoenpiriyakij'
 	}
 
